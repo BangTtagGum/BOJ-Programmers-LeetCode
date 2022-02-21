@@ -90,6 +90,10 @@ int main(){
     }
     pick(N,idx,idx2,chick,home,M,M);
     printf("%d\n",result);
-
+    for(int i = 0; i < N;i++)
+        free(map[i]);
+    free(map);
+    free(chick);
+    free(home);
 
 }
