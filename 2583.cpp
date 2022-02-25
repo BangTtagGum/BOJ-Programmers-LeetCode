@@ -16,8 +16,7 @@ int arr[10001];
 int dx[4] = {0,1,0,-1};
 int dy[4] = {1,0,-1,0};
 
-
-
+        
 
 void dfs(int a,int b){
     if(map[a][b] == 0){

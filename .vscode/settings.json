@@ -3,6 +3,9 @@
         "stdlib.h": "c",
         "iostream": "cpp",
         "queue": "cpp",
-        "functional": "cpp"
+        "functional": "cpp",
+        "iosfwd": "cpp",
+        "cmath": "cpp",
+        "ios": "cpp"
     }
 }

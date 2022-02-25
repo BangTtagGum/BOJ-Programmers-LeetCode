@@ -14,7 +14,7 @@ int main(){
     int N;
     int val;
     cin >> N;
-    priority_queue<int, vector<int>, greater<int> > pq , ppq;
+    priority_queue<int, vector<int>, greater<int> > pq , ppq;  
     for(int i = 1; i <= N; i++){
         cin >> val;
         pq.push(val);
@@ -37,7 +37,6 @@ int main(){
 #include <iostream>
 #include <queue>
 using namespace std;
-
 
 int main(){ios::sync_with_stdio(false),cin.tie(NULL),cout.tie(NULL);
     int N;
@@ -73,21 +72,19 @@ int main(){ios::sync_with_stdio(false),cin.tie(NULL),cout.tie(NULL);
             }
             cout << mid << '\n';
         }
-        
     }
     return 0;
 }
 
-/*
-         
-    짝수번째에 mid 보다 작거나 같음       1/ .3  /5
-    val 을 minq에 pus 하고 mid 를 maxq에 push 한 뒤 minq의 top을 mid로 저장하고 minq pop
+/*     
+    짝수번째에 mid 보다 작거나 같음     최대힙  0 / .1   /3 5 최소힙
+    val 을 minq에 push 하고 mid 를 maxq에 push 한 뒤 minq의 top을 mid로 저장하고 minq pop
 
-    짝수번째에 mid 보다 큼              1/ .3  /5
+    짝수번째에 mid 보다 큼              1/ .3  /5 6
     val 을 maxq로 push 함            
     
-    홀수번째에 mid 보다 작거나 같음       1/ .3  /4 5
+    홀수번째에 mid 보다 작거나 같음       1 2/  .3  /4 5
     val 을 minq로 push 함
 
-    홀수번째에 mid 보다 큼              1/ .3  /5 7    
+    홀수번째에 mid 보다 큼              1 3/  .5 /7  9 
 */

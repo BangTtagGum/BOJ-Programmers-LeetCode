@@ -11,15 +11,15 @@ using namespace std;
 int main(){
     int num , val;
     long long result = 0;
-    cin >> num;
-    priority_queue<int, vector<int>, greater<int> > pq;
+    cin >> num;                      
+    priority_queue<int, vector<int>, greater<int> > pq; // 우선순위 큐
     for( int i = 0; i < num; i++){
         cin >> val;
-        pq.push(val);
-    }
+        pq.push(val);                     
+    }                              
     while(pq.size()> 1){
         int a = pq.top();       //최소 힙에서 가장 위에 있는 값
-        pq.pop();
+        pq.pop();                     
         a += pq.top();
         pq.pop();
         result += a;
@@ -28,5 +28,7 @@ int main(){
     cout << result;
     return 0;
 }
+
+
 
 

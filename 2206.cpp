@@ -1,6 +1,8 @@
 /*
     2022.02.21
     2206번 벽 부수고 이동하기
+    bfs로 최단 거리를 구하고 가는 경로도 구하고 싶다면
+    도착점에 저장되어있는 visit의 수에서 역 추적하면 경로가 나온다
 */
 #include <iostream>
 #include <queue>
@@ -12,18 +14,19 @@ struct Point{
     int y;
     int x;
     int crash;
-};
- 
+};                              
+
 int dx[4] = {1,0,-1,0};
 int dy[4] = {0,1,0,-1};
  
 int N, M;
 int graph[MAX + 1][MAX + 1];
 int visited[MAX + 1][MAX + 1][2]; // y, x, block 뚫을수 있는 횟수
- 
+
 bool is_inside(int _ny, int _nx) {
     return (_ny >= 1 && _ny <= N && _nx >= 1 && _nx <= M);
 }
+
  
 int bfs() {
     queue<Point> q;

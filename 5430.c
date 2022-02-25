@@ -1,7 +1,7 @@
 /*
     2022.02.12
     5430번 AC
-    문자열 입력시 버퍼 초기화 문제 잊지말자.
+    문자열 입력시 버퍼 초기화 문제 잊지말자. 투포인터 할때 느낌
 */
 #include <stdio.h>
 
@@ -10,6 +10,7 @@ int x[100001];
 int len;
 int back,error;
 int start, end;
+
 void R(){
     back = (back)? 0 : 1;       //back 이 1이면 다시 0으로 0이면 1로 저장
 } 

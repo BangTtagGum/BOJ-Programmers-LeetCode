@@ -108,13 +108,12 @@ int main(){
         for(int j = 0 ; j < M ; j++){
             cin >> box[i][j];
             if(box[i][j] == 0)
-                green++;
+                green++;  
             else if(box[i][j] == 1){
                 to[toCnt].i = i;
                 to[toCnt].j = j;
                 toCnt++;
             }
-
         }
     }
 
@@ -159,6 +158,7 @@ int main(){
         }
         yesterday = today;
     }
+    
 
     cout << day << endl;
 

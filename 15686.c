@@ -1,6 +1,9 @@
 /*
     2022.02.12
     15686번 치킨배달
+
+    1 2 3 4 5
+    1 2 3 , 1 2 4, 1 2 5, 2 3 4
 */
 #include <stdio.h>
 #include <stdlib.h>
@@ -12,7 +15,7 @@ int total = 0, result = 9999999;
 typedef struct House{
     int x;      //x좌표
     int y;      //y좌표
-    int h;      //집 치킨집 구분
+    int h;      //집 치킨집 구분 1 2
     int c_dis;  //치킨거리
     int on_off; //치킨집 활성화
 }House;
@@ -46,7 +49,7 @@ void pick(int N, int idx,int idx2,House* chick,House* home ,int M,int k){
     last = M-k-1;   //마지막 으로 on 한 치킨집 index  
     start = last+1;
     for(int i = start; i < idx; i++){
-        if(chick[i].on_off == on) {
+        if(chick[i].on_off == on) {             
             k--;
             continue;
         }
@@ -90,6 +93,7 @@ int main(){
     }
     pick(N,idx,idx2,chick,home,M,M);
     printf("%d\n",result);
+    
     for(int i = 0; i < N;i++)
         free(map[i]);
     free(map);

@@ -6,7 +6,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-char a[100];
+char a[100];  
 char b[100];
 
 void back(char * arr,int k,int n){
