@@ -7,7 +7,7 @@
 */
 #include <stdio.h>
 #include <stdlib.h>
-
+#include <time.h>
 const int on = 1;
 const int off = 0;
 int total = 0, result = 9999999;
@@ -63,6 +63,8 @@ void pick(int N, int idx,int idx2,House* chick,House* home ,int M,int k){
 }
 
 int main(){
+    clock_t start, end; double result2; start = clock();
+
     int N,M;
     int idx = 0;
     int idx2 = 0;
@@ -100,4 +102,11 @@ int main(){
     free(chick);
     free(home);
 
+    end = clock(); 
+    result2 = (double)(end - start);
+    printf("%f",result2/CLOCKS_PER_SEC);
+
+
+
 }
+

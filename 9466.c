@@ -10,7 +10,9 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <string.h>
+#include <time.h>
 #define MAX_SIZE 100001
+
 
 
 int cnt;
@@ -54,5 +56,7 @@ int main(){
 
         
     }
+
+    
     return 0;
 }

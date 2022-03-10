@@ -34,7 +34,6 @@ int main(){
 }
 */
 
-
 int main(){
     int N;
     int val;

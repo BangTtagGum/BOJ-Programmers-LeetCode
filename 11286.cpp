@@ -10,9 +10,9 @@ using namespace std;
 struct cmp{
     bool operator()(int a, int b){
         if(abs(a) == abs(b)){
-            return a > b;
+            return a > b; 
         }
-        else{
+        else{          
             return abs(a) > abs(b);
         }
     }
@@ -31,7 +31,7 @@ int main(){
                 cout << 0 << '\n';
                 continue;
             }
-            cout << pq.top() << '\n';
+            cout << pq.top() << '\n'; 
             pq.pop();
             continue;
         }

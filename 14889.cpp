@@ -12,10 +12,10 @@ int visited[20];
 int arr[20];
 int result = 99999;
 
-void back(int cnt){
+void back(int cnt){ 
     if(cnt == N/2){
         int k = 0;
-        sp = 0;
+        sp = 0; 
         lp = 0;
         for(int i = 0; i < N; i++){     //앞에 절반만 백트래킹으로 구하고 안구해진 것들만 다른팀으로 만들어준다.
             if(!visited[i]){
