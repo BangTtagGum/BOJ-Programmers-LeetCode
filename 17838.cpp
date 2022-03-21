@@ -1,6 +1,7 @@
 /*
     2022.03.21
     17838번 커맨드
+    코드랑 시간복잡도 적어서 보내기
 */
 #include <iostream>
 using namespace std;
@@ -33,4 +34,5 @@ int main(){
     }
     return 0;
 }
+
 
