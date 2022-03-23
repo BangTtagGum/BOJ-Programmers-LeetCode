@@ -1,6 +1,7 @@
 /*
     2022.03.22
     11651번 좌표 정렬하기 2
+    시간복잡도 O(NlogN)
 */
 #include <iostream>
 #include <vector>

@@ -15,7 +15,6 @@ struct CCTV {
     int row;
     int column;
     int type;
-    int dir;
 };
 
 stack<pair<int,int> > tmp_vacuum; //없앤 사각지대 임시 저장
@@ -44,7 +43,6 @@ int main(){ios::sync_with_stdio(false),cin.tie(NULL),cout.tie(NULL);
                 c_home[c_idx].row = i;
                 c_home[c_idx].column = j;
                 c_home[c_idx].type = map[i][j];
-                c_home[c_idx].dir = 0;
                 c_idx++;
             }
         }

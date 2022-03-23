@@ -1,6 +1,7 @@
 /*
     2022.03.22
     1543번 문서 검색
+    시간복잡도 : O(1)?
 */
 #include <iostream>
 #include <vector>

@@ -1,6 +1,7 @@
 /*
     2022.03.22
     1181번 단어정렬
+    시간복잡도 : O(NlogN)
 */
 #include <iostream>
 #include <vector>
@@ -22,7 +23,7 @@ int main(){
     for(int i = 0; i < N; i++){
         cin >> words[i];
     }
-    sort(words.begin(),words.end(),compare);
+    sort(words.begin(),words.end(),compare); // NlogN
     cout<< words[0] << '\n';
     for(int i = 1; i < N; i++){
         if(words[i] != words[i-1])

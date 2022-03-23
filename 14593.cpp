@@ -1,6 +1,7 @@
 /*
     2022.03.22
     14593번 2017 아주대학교 프로그래밍 경시대회(Large)
+    시간복잡도 O(NlogN)
 */
 #include <iostream>
 #include <vector>
