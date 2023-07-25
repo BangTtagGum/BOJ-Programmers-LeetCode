@@ -39,6 +39,7 @@ public class Main {
         int n;
         n = Integer.parseInt(br.readLine());
 
+
         while (n != 0) {
             int cnt = 0;
 
@@ -60,7 +61,7 @@ public class Main {
 }
 
 
-/* 시간초과
+/*
 public class Main {
 
     public static void main(String[] args) throws IOException {

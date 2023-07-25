@@ -34,4 +34,19 @@ public class Main {
         bw.flush();
 
     }
+
+    boolean isPrime(int n) {
+        // N이 2보다 작다면 실수가 아니다.
+        if (N < 2) {
+            return false;
+        }
+        for (int i = 2; i < n-1; i++) {
+            if (n / i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
 }
+
