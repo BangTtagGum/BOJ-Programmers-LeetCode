@@ -17,7 +17,7 @@ public class Main {
         //힙 생성
         ArrayList<Integer> heap = new ArrayList<>();
 
-        // 힙의 인덱스가 1 부터 시작할 수 있도록 빈 공간 삽입
+//         힙의 인덱스가 1 부터 시작할 수 있도록 빈 공간 삽입
         heap.add(0);
 
         int n = Integer.parseInt(br.readLine());
