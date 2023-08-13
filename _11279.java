@@ -23,7 +23,7 @@ public class Main {
         int n = Integer.parseInt(br.readLine());
         for (int i = 0; i < n; i++) {
             int ins = Integer.parseInt(br.readLine());
-            if (ins == 0) { // 삭제연산
+            if (ins == 0) { // 삭제 연산
                 if (heap.size() == 1) { // heap 이 비어있는 경우
                     sb.append(0).append("\n");
                 } else { // Root 노드 반환 후 삭제 및 힙 정렬
