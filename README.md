@@ -1,6 +1,6 @@
 # 💯 BOJ (Baekjoon Online Judge)
 
-<a href="https://www.acmicpc.net/workbook/top">Baekjoon Online Judge</a> 문제 풀이 정리 레포지토리 입니다.
+Baekjoon Online Judge 문제 풀이 정리 레포지토리 입니다.
 
 ### ❓ 올라와있는 파일이름둘의 의미 ❓
   
