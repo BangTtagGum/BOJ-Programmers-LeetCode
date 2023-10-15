@@ -29,5 +29,6 @@ public class _9461 {
             int n = Integer.parseInt(br.readLine());
             System.out.println(dp[n]);
         }
+        
     }
 }
