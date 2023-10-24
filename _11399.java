@@ -21,7 +21,7 @@ public class Main {
         ArrayList<Integer> arr = new ArrayList<>();
         while (st.hasMoreTokens()) {
             arr.add(Integer.valueOf(st.nextToken()));
-        }
+        }  
         arr.sort(new Comparator<Integer>() {
             @Override
             public int compare(Integer o1, Integer o2) {
