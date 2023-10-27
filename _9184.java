@@ -7,7 +7,7 @@ import java.util.StringTokenizer;
 
 /**
  * 2023.08.05
- * 9184 신나는 함수 실행
+ * 9184 신나는 함수 실행 
  */
 public class Main {
 
