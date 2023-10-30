@@ -8,7 +8,7 @@ import java.util.StringTokenizer;
 
 /**
  * 2023.07.29
- * 2798 블랙잭
+ * 2798 블랙잭 
  */
 public class Main {
 
