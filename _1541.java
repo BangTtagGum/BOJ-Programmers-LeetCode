@@ -16,7 +16,7 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine(),"+-",true);
 
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 100; i++) { 
             exp[i] = 0;
         }
         int idx = 0; // 수식 입력할 위치 인덱스
