@@ -8,7 +8,7 @@
 using namespace std;
 
 
-int main(){
+int main(){ 
     string S;
     cin >> S;
     vector<string> suf(S.size());
