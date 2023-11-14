@@ -11,7 +11,7 @@ import java.util.StringTokenizer;
  */
 public class Main {
 
-    static String ins[] = new String[2];
+    static String ins[] = new String[2]; 
     static int stack[] = new int[10000];
     static int top = 0;
     public static void main(String[] args) throws IOException {
