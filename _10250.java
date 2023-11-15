@@ -8,7 +8,7 @@ import java.io.OutputStreamWriter;
 import java.util.StringTokenizer;
 
 /**
- * 10250
+ * 10250 
  * ACM 호텔
  */
 public class Main {
