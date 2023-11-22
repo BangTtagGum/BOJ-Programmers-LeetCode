@@ -53,10 +53,10 @@ public class Main {
             System.out.println("FRULA");
         } else {
             StringBuilder sb = new StringBuilder();
-            while (!stack.isEmpty()) {
-                sb.append(stack.pop());
+            for(int i = 0; i < stack.size(); i++){
+                sb.append(stack.get(i));
             }
-            System.out.println(sb.reverse());
+            System.out.println(sb);
         }
     }
 }
