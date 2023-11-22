@@ -1,5 +1,3 @@
-
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -14,30 +12,29 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         String s = br.readLine();
-        char[] charArray = s.toCharArray();
 
         String bomb = br.readLine();
-        char[] bombArray = bomb.toCharArray();
 
         Stack<Character> stack = new Stack<>();
         Stack<Character> storage = new Stack<>();
 
         int bombLength = bomb.length();
         for (int i = 0; i < s.length(); i++) {
-//            폭탄의 마지막 문자와 다음 문자가 일치하면 이전에 문자들을 탐색
-            if (charArray[i] == bombArray[bombLength-1]) {
-                storage.push(charArray[i]);
+            //폭타의 마지막 문자와 다음 문자가 일치하면 이전에 문자들을 탐색
+            if (s.charAt(i) == bomb.charAt(bombLength - 1)) {
+                storage.push(s.charAt(i));
                 for (int j = bombLength - 2; j >= 0; j--) {
                     if (stack.isEmpty()) {
                         break;
                     }
                     Character c = stack.pop();
-                    if (c == bombArray[j]) {
+                    if (c == bomb.charAt(j)) {
                         storage.push(c);
                     } else {
                         stack.push(c);
                         break;
                     }
+                    
                 }
                 //폭탄이 터질 경우
                 if (storage.size() == bombLength) {
@@ -48,7 +45,7 @@ public class Main {
                     }
                 }
             } else {
-                stack.push(charArray[i]);
+                stack.push(s.charAt(i));
             }
         }
 
