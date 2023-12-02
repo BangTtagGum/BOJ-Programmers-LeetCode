@@ -16,6 +16,8 @@ public class Main {
     static int n;
     static int m;
     static char[][] boardMap;
+    static boolean[][][][] redBlueVisited = new boolean[10][10][10][10];
+
     public static void main(String[] args) throws IOException {
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -56,14 +58,19 @@ public class Main {
                                 return;
                             }
                         } else {
-                            q.add(newBoard);
+                            int[] points = newBoard.redBluePoints();
+                            if (!redBlueVisited[points[0]][points[1]][points[2]][points[3]]) {
+                                q.add(newBoard);
+                                redBlueVisited[points[0]][points[1]][points[2]][points[3]] = true;
+                            }
                         }
                     }
                 }
             }
             cnt++;
         }
-
+        System.out.println(0);
+        
 
 
 
@@ -78,6 +85,7 @@ public class Main {
         }
         System.out.println();
     }
+
 
 
     static class Board {
@@ -101,16 +109,6 @@ public class Main {
             this.c = board.c;
             this.map = copyMap(board.map);
             this.preCommand = board.preCommand;
-        }
-
-        private char[][] copyMap(char[][] map) {
-            char[][] clone = new char[n][m];
-            for (int i = 0; i < r; i++) {
-                for (int j = 0; j < c; j++) {
-                    clone[i][j] = map[i][j];
-                }
-            }
-            return clone;
         }
 
         public boolean move(char command) {
@@ -264,6 +262,31 @@ public class Main {
             }
             this.preCommand = 'L';
             return flag;
+        }
+
+        private char[][] copyMap(char[][] map) {
+            char[][] clone = new char[n][m];
+            for (int i = 0; i < r; i++) {
+                for (int j = 0; j < c; j++) {
+                    clone[i][j] = map[i][j];
+                }
+            }
+            return clone;
+        }
+        public int[] redBluePoints() {
+            int[] redBlueArray = new int[4];
+            for (int i = 1; i < r-1; i++) {
+                for (int j = 1; j < c-1; j++) {
+                    if (map[i][j] == 'R') {
+                        redBlueArray[0] = i;
+                        redBlueArray[1] = j;
+                    }else if (map[i][j] == 'B') {
+                        redBlueArray[2] = i;
+                        redBlueArray[3] = j;
+                    }
+                }
+            }
+            return redBlueArray;
         }
     }
 }
