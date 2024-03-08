@@ -5,10 +5,17 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.StringTokenizer;
 
+/**
+ * 2024.03.08
+ * 6593 상범빌딩
+ */
+
 class Main {
 
-    static char[] dir = {'N', 'W', 'S', 'E', 'U', 'D'};
-    static int L,R,C;
+    static int[] dr = {-1, 0, 1, 0, 0, 0}; // 북 서 남 동 위 아래
+    static int[] dc = {0, -1, 0, 1, 0, 0};
+    static int[] df = {0, 0, 0, 0, -1, 1};
+    static int L, R, C;
     static char[][][] building;
 
     public static void main(String[] args) throws IOException {
@@ -54,8 +61,6 @@ class Main {
     }
 
     static void bfs(SangBum sb) {
-        int time = 1;
-
         Queue<SangBum> q = new LinkedList<>();
 
         q.add(sb);
@@ -66,132 +71,24 @@ class Main {
             int c = poll.column;
             int f = poll.floor;
 
-            int nr;
-            int nc;
-            int nf;
-
             for (int i = 0; i < 6; i++) {
-                switch (dir[i]) {
-                    case 'N':
-                        nr = r - 1;
-                        nc = c;
-                        nf = f;
+                int nr = r + dr[i];
+                int nc = c + dc[i];
+                int nf = f + df[i];
 
-                        // validCheck
-                        if (!isValid(nr, nc, nf)) {
-                            break;
-                        }
-
-                        // endCheck
-                        if (building[nr][nc][nf] == 'E') {
-                            System.out.println("Escaped in " + poll.time + " minute(s).");
-                            return;
-                        }
-
-                        q.add(new SangBum(nr,nc,nf,poll.time+1));
-                        building[nr][nc][nf] = '#';
-                        break;
-                    case 'W':
-                        nr = r;
-                        nc = c -1;
-                        nf = f;
-
-                        // validCheck
-                        if (!isValid(nr, nc, nf)) {
-                            break;
-                        }
-
-                        // endCheck
-                        if (building[nr][nc][nf] == 'E') {
-                            System.out.println("Escaped in " + poll.time + " minute(s).");
-                            return;
-                        }
-
-                        q.add(new SangBum(nr,nc,nf,poll.time+1));
-
-                        building[nr][nc][nf] = '#';
-                        break;
-                    case 'S':
-                        nr = r + 1;
-                        nc = c;
-                        nf = f;
-
-                        // validCheck
-                        if (!isValid(nr, nc, nf)) {
-                            break;
-                        }
-
-                        // endCheck
-                        if (building[nr][nc][nf] == 'E') {
-                            System.out.println("Escaped in " + poll.time + " minute(s).");
-                            return;
-                        }
-
-                        q.add(new SangBum(nr,nc,nf,poll.time+1));
-
-                        building[nr][nc][nf] = '#';
-                        break;
-                    case 'E':
-                        nr = r;
-                        nc = c + 1;
-                        nf = f;
-
-                        // validCheck
-                        if (!isValid(nr, nc, nf)) {
-                            break;
-                        }
-
-                        // endCheck
-                        if (building[nr][nc][nf] == 'E') {
-                            System.out.println("Escaped in " + poll.time + " minute(s).");
-                            return;
-                        }
-
-                        q.add(new SangBum(nr,nc,nf,poll.time+1));
-
-                        building[nr][nc][nf] = '#';
-                        break;
-                    case 'U':
-                        nr = r;
-                        nc = c;
-                        nf = f - 1;
-
-                        // validCheck
-                        if (!isValid(nr, nc, nf)) {
-                            break;
-                        }
-
-                        // endCheck
-                        if (building[nr][nc][nf] == 'E') {
-                            System.out.println("Escaped in " + poll.time + " minute(s).");
-                            return;
-                        }
-
-                        q.add(new SangBum(nr,nc,nf,poll.time+1));
-
-                        building[nr][nc][nf] = '#';
-                        break;
-                    case 'D':
-                        nr = r;
-                        nc = c;
-                        nf = f + 1;
-
-                        // validCheck
-                        if (!isValid(nr, nc, nf)) {
-                            break;
-                        }
-
-                        // endCheck
-                        if (building[nr][nc][nf] == 'E') {
-                            System.out.println("Escaped in " + poll.time + " minute(s).");
-                            return;
-                        }
-
-                        q.add(new SangBum(nr,nc,nf,poll.time+1));
-
-                        building[nr][nc][nf] = '#';
-                        break;
+                // validCheck
+                if (!isValid(nr, nc, nf)) {
+                    continue;
                 }
+
+                // endCheck
+                if (building[nr][nc][nf] == 'E') {
+                    System.out.println("Escaped in " + poll.time + " minute(s).");
+                    return;
+                }
+
+                q.add(new SangBum(nr, nc, nf, poll.time + 1));
+                building[nr][nc][nf] = '#';
             }
         }
         System.out.println("Trapped!");
@@ -202,12 +99,12 @@ class Main {
             if (building[r][c][f] != '#') {
                 return true;
             }
-            return false;
         }
         return false;
     }
 
     static class SangBum {
+
         int row;
         int column;
         int floor;
