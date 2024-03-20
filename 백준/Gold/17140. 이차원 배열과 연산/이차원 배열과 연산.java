@@ -1,6 +1,12 @@
-import java.io.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
+import java.util.StringTokenizer;
 import java.util.stream.Collectors;
 
 class Main{
@@ -32,7 +38,6 @@ public static int[][] array = new int[101][101];
             // 가장 긴 Column 길이 저장
             newMaxColumn = Math.max(newMaxColumn, collect.size() * 2);
 
-//            maxColumn = Math.max(maxColumn, collect.size() * 2);
             // 배열 재정렬
             int idx = 1;
             for (Entry<Integer, Integer> entry : collect) {
@@ -94,55 +99,6 @@ public static int[][] array = new int[101][101];
         }
     }
 
-//    public static void RCSort(int ver) {
-//        // R 정렬
-//        if (ver == 0) {
-//            int size = maxColumn;
-//            int standard = maxRow;
-//        } else { // C 정렬
-//            int size = maxRow;
-//            int standard = maxRow;
-//
-//        }
-//        int size = maxColumn;
-//        for (int i = 1; i <= maxRow; i++) {
-//            Map<Integer, Integer> count = new LinkedHashMap<>();
-//
-//            for (int j = 1; j <= size; j++) {
-//                if (array[i][j] != 0) {
-//                    count.put(array[i][j], count.getOrDefault(array[i][j], 0) + 1);
-//                }
-//            }
-//
-//            // 맵 정렬
-//            Set<Entry<Integer, Integer>> entries = count.entrySet();
-//            List<Entry<Integer, Integer>> collect = entries.stream().sorted((m1, m2) -> {
-//                if (m1.getValue() == m2.getValue()) {
-//                    return m1.getKey() - m2.getKey();
-//                }
-//                return m1.getValue() - m2.getValue();
-//            }).collect(Collectors.toList());
-//
-//            // 배열 재정렬
-//            maxColumn = Math.max(maxColumn, collect.size() * 2);
-//            if (maxColumn > 100) {
-//                maxColumn= 100;
-//            }
-//            int idx = 1;
-//            for (Entry<Integer, Integer> entry : collect) {
-//                if (idx > 100) {
-//                    break;
-//                }
-//                array[i][idx++] = entry.getKey();
-//                array[i][idx++] = entry.getValue();
-//            }
-//            if (idx < maxColumn) {
-//                for (int j = idx; j <= maxColumn ; j++) {
-//                    array[i][j] = 0;
-//                }
-//            }
-//        }
-//    }
     public static void main(String[] args) throws IOException {
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -170,7 +126,6 @@ public static int[][] array = new int[101][101];
             }
             time++;
             if (maxRow >= maxColumn) {
-                // R 연산
                 R();
             } else {
                 C();
