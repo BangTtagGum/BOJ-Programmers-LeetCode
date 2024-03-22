@@ -1,17 +1,32 @@
 class Solution {
     public static boolean isPalindrome(ListNode head) {
 
-        Deque<Integer> dq = new ArrayDeque<>();
+        ListNode fast = head, slow = head;
 
-        while (head != null) {
-            dq.add(head.val);
-            head = head.next;
+        while (fast != null && fast.next != null) {
+            fast = fast.next.next;
+            slow = slow.next;
         }
-        
-        while (!dq.isEmpty() && dq.size() > 1) {
-            if (dq.pollFirst() != dq.pollLast()) {
+
+        // 노드의 개수가 홀수 일 경우 가운데를 비교 대상에서 제거
+        if (fast != null) {
+            slow = slow.next;
+        }
+
+        ListNode rev = null;
+        while (slow != null) {
+            ListNode next = slow.next;
+            slow.next = rev;
+            rev = slow;
+            slow = next;
+        }
+
+        while (rev != null) {
+            if (rev.val != head.val) {
                 return false;
-            }            
+            }
+            rev = rev.next;
+            head = head.next;
         }
         return true;
     }
