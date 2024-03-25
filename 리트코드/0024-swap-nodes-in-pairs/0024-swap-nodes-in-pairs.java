@@ -10,20 +10,19 @@
  */
 class Solution {
     public ListNode swapPairs(ListNode head) {
-        ListNode node = new ListNode(0);
-        ListNode root = node;
-        node.next = head;
-        while(node.next != null && node.next.next != null){
-            ListNode a = node.next;
-            ListNode b = node.next.next;
-            a.next = b.next;
-            b.next = a;
-            node.next = b;
-            
-            node = node.next.next;
+        // 현재 노드 다음 노드 있으면 반복
+        if(head != null && head.next != null){
+            // 다음 노드 선언
+            ListNode p = head.next;
+            // 다음 다음 노드를 파라미터로 전달하고 스왑된 값을 리턴받음
+            head.next = swapPairs(head.next.next);
+            // 다음 다음 노드는 현재 노드로 저장
+            p.next = head;
+            // 다음 노드 리턴
+            return p;
         }
 
-        return root.next;
+        return head;
     }
 
     
