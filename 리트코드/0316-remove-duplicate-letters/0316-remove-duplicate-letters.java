@@ -1,30 +1,31 @@
 class Solution {
-    public Set<Character> toSortedSet(String s) {
-        Set<Character> set = new TreeSet<>((c1, c2) -> {
-            if (c1 == c2) {
-                return 0;
-            } else if (c1 > c2) {
-                return 1;
-            } else {
-                return -1;
-            }
-        });
 
-        for (int i = 0; i < s.length(); i++) {
-            set.add(s.charAt(i));
+     public static String removeDuplicateLetters(String s) {
+        Map<Character, Integer> counter = new HashMap<>();
+        Map<Character, Boolean> seen = new HashMap<>();
+        Deque<Character> stack = new ArrayDeque<>();
+
+        for (char c : s.toCharArray()) {
+            counter.put(c, counter.getOrDefault(c, 0) + 1);
         }
-        return set;
-    }
+        for (char c : s.toCharArray()) {
 
-    public String removeDuplicateLetters(String s) {
-        for (char c : toSortedSet(s)) {
-
-            String suffix = s.substring(s.indexOf(c));
-
-            if (toSortedSet(s).equals(toSortedSet(suffix))) {
-                return c + removeDuplicateLetters(suffix.replace(String.valueOf(c), ""));
+            counter.put(c, counter.get(c) - 1);
+            if (seen.get(c) != null && seen.get(c)) {
+                continue;
             }
+
+            while (!stack.isEmpty() && stack.peek() > c && counter.get(stack.peek()) > 0) {
+                seen.put(stack.pop(), false);
+            }
+            stack.push(c);
+            seen.put(c, true);
         }
-        return "";
+
+        StringBuilder sb = new StringBuilder();
+        while (!stack.isEmpty()) {
+            sb.append(stack.pollLast());
+        }
+        return sb.toString();
     }
 }
