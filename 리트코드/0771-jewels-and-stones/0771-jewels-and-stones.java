@@ -13,7 +13,7 @@ class Solution {
         int answer = 0;
         for (char c : jewels.toCharArray()) {
             if(freqs.containsKey(c)){
-                anwer += freqs.get(c);
+                answer += freqs.get(c);
             }
         }
         return answer;
