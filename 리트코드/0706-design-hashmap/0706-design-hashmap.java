@@ -72,12 +72,8 @@ class MyHashMap {
         Node node = nodes[index];
         // 일치하는 키가 있다면
         if (node.key == key) {
-            // 다음 노드가 없으면 해당 인덱스는 null 처리
-            if (node.next == null)
-                nodes[index] = null;
-            // 다음 노드가 있다면 다음 노드를 해당 인덱스로 지정
-            else
-                nodes[index] = node.next;
+            nodes[index] = node.next;
+            return ;
         }
         // 연결 리스트 노드일 때의 삭제 처리
         Node prev = node;
