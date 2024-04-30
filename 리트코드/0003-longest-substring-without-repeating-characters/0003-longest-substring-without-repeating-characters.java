@@ -9,9 +9,9 @@ class Solution {
             if (used.containsKey(c) && left <= used.get(c)) {
                 // 마지막으로 저장되었던 위치 다음으로 이동
                 left = used.get(c) + 1;
+            } else{
+                maxLen = Math.max(maxLen, right - left + 1);    
             }
-            
-            maxLen = Math.max(maxLen, right - left + 1);
             used.put(c,right);
             right++;
             
