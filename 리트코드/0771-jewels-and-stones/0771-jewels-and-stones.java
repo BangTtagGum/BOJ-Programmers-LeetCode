@@ -12,7 +12,9 @@ class Solution {
 
         int answer = 0;
         for (char c : jewels.toCharArray()) {
-            answer += freqs.getOrDefault(c,0);
+            if(freqs.containsKey(c)){
+                anwer += freqs.get(c);
+            }
         }
         return answer;
     }
