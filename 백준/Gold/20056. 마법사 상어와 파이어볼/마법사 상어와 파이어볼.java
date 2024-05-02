@@ -2,7 +2,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayDeque;
-import java.util.Arrays;
 import java.util.Deque;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -10,12 +9,14 @@ import java.util.StringTokenizer;
 
 public class Main {
 
-    static int[] dr;
-    static int[] dc;
+    static int[] dr = {-1, -1, 0, 1, 1, 1, 0, -1};
+    static int[] dc = {0, 1, 1, 1, 0, -1, -1, -1};
 
     static int n;
     static int m;
     static int k;
+
+    static Deque<FireBall>[][] map;
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -25,8 +26,13 @@ public class Main {
         m = Integer.parseInt(st.nextToken());
         k = Integer.parseInt(st.nextToken());
 
-        dr = new int[]{-1, -1, 0, 1, 1, 1, 0, -1};
-        dc = new int[]{0, 1, 1, 1, 0, -1, -1, -1};
+        map = new ArrayDeque[n][n];
+        for (int i = 0; i < n; i++) {
+            map[i] = new ArrayDeque[n];
+            for (int j = 0; j < n; j++) {
+                map[i][j] = new ArrayDeque<>();
+            }
+        }
 
         WizardShark wizardShark = new WizardShark();
 
@@ -46,7 +52,7 @@ public class Main {
             wizardShark.spell();
         }
 
-        System.out.println(wizardShark.getCurrentMass());
+        System.out.println(wizardShark.getTotalMass());
 
     }
 
@@ -65,7 +71,7 @@ public class Main {
             this.direction = direction;
         }
 
-        void move(Deque<FireBall>[][] map) {
+        void move() {
             int nr = (r + (dr[direction] + n) * speed) % n;
             int nc = (c + (dc[direction] + n) * speed) % n;
 
@@ -79,23 +85,12 @@ public class Main {
     static class WizardShark {
 
         Queue<FireBall> fireBalls = new LinkedList<>();
-        Deque<FireBall>[][] map;
-
-        public WizardShark() {
-            this.map = new ArrayDeque[n][n];
-            for (int i = 0; i < n; i++) {
-                map[i] = new ArrayDeque[n];
-                for (int j = 0; j < n; j++) {
-                    map[i][j] = new ArrayDeque<>();
-                }
-            }
-        }
 
         public void spell() {
             // 파이어볼 이동
             int len = fireBalls.size();
             for (int i = 0; i < len; i++) {
-                fireBalls.poll().move(map);
+                fireBalls.poll().move();
             }
 
             // 파이어볼 합체
@@ -144,7 +139,7 @@ public class Main {
             }
         }
 
-        int getCurrentMass() {
+        int getTotalMass() {
             int totalMass = 0;
             int len = fireBalls.size();
             for (int i = 0; i < len; i++) {
