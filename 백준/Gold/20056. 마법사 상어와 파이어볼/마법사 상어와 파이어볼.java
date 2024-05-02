@@ -2,7 +2,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayDeque;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Deque;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -25,8 +25,8 @@ public class Main {
         m = Integer.parseInt(st.nextToken());
         k = Integer.parseInt(st.nextToken());
 
-        dr = new int[]{n - 1, n - 1, 0, 1, 1, 1, 0, n - 1};
-        dc = new int[]{0, 1, 1, 1, 0, n - 1, n - 1, n - 1};
+        dr = new int[]{-1, -1, 0, 1, 1, 1, 0, -1};
+        dc = new int[]{0, 1, 1, 1, 0, -1, -1, -1};
 
         WizardShark wizardShark = new WizardShark();
 
@@ -45,7 +45,6 @@ public class Main {
         for (int i = 0; i < k; i++) {
             wizardShark.spell();
         }
-
 
         System.out.println(wizardShark.getCurrentMass());
 
@@ -67,8 +66,8 @@ public class Main {
         }
 
         void move(Deque<FireBall>[][] map) {
-            int nr = (r + dr[direction] * speed) % n;
-            int nc = (c + dc[direction] * speed) % n;
+            int nr = (r + (dr[direction] + n) * speed) % n;
+            int nc = (c + (dc[direction] + n) * speed) % n;
 
             map[nr][nc].add(this);
             r = nr;
@@ -82,15 +81,17 @@ public class Main {
         Queue<FireBall> fireBalls = new LinkedList<>();
         Deque<FireBall>[][] map;
 
-        public void spell() {
-            map = new ArrayDeque[n][n];
+        public WizardShark() {
+            this.map = new ArrayDeque[n][n];
             for (int i = 0; i < n; i++) {
                 map[i] = new ArrayDeque[n];
                 for (int j = 0; j < n; j++) {
                     map[i][j] = new ArrayDeque<>();
                 }
             }
+        }
 
+        public void spell() {
             // 파이어볼 이동
             int len = fireBalls.size();
             for (int i = 0; i < len; i++) {
@@ -153,4 +154,3 @@ public class Main {
         }
     }
 }
-
