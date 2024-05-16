@@ -1,28 +1,25 @@
 class Solution {
-    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+    public static List<List<Integer>> combinationSum(int[] candidates, int target) {
 
         List<List<Integer>> result = new ArrayList<>();
-        List<Integer> collect = Arrays.stream(candidates).boxed().collect(Collectors.toList());
-        dfs(result, collect, new LinkedList<>(),0, target, collect.size(), 0, 0);
+        dfs(result, candidates, new LinkedList<>(), 0, target);
 
         return result;
     }
 
-    private void dfs(List<List<Integer>> result, List<Integer> collect,
-            LinkedList<Integer> elements,
-            int start, int target, int n, int k, int sum) {
+    private static void dfs(List<List<Integer>> result, int[] candidates,
+            LinkedList<Integer> elements, int index, int target) {
 
-        if (sum > target) {
+        if (target < 0) {
             return;
         }
-        if (sum == target) {
+        if (target == 0) {
             result.add(elements.stream().collect(Collectors.toList()));
             return;
         }
-        for (int i = start; i < n; i++) {
-            int val = collect.get(i);
-            elements.add(val);
-            dfs(result, collect, elements,i, target, n, k + 1, sum + val);
+        for (int i = index; i < candidates.length; i++) {
+            elements.add(candidates[i]);
+            dfs(result, candidates, elements, i, target - candidates[i]);
             elements.removeLast();
         }
     }
