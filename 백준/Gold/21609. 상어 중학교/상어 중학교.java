@@ -77,15 +77,14 @@ public class Main {
                         // 사이즈가 2 이상이어야 그룹으로 인정
                         if (blockGroup.pq.size() >= 2) {
                             pq.add(blockGroup);
+                            // 무지개는 다른 그룹에서도 탐색해야 하기 때문에 탐색 가능하게 되돌리기
+                            int len = rainbowQueue.size();
+                            for (int k = 0; k < len; k++) {
+                                int[] rainbowBlock = rainbowQueue.poll();
+                                isVisited[rainbowBlock[0]][rainbowBlock[1]] = false;
+                                rainbowQueue.add(rainbowBlock);
+                            }
                         }
-                        // 무지개는 다른 그룹에서도 탐색해야 하기 때문에 탐색 가능하게 되돌리기
-                        int len = rainbowQueue.size();
-                        for (int k = 0; k < len; k++) {
-                            int[] rainbowBlock = rainbowQueue.poll();
-                            isVisited[rainbowBlock[0]][rainbowBlock[1]] = false;
-                            rainbowQueue.add(rainbowBlock);
-                        }
-
                     }
                 }
             }
