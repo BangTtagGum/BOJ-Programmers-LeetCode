@@ -2,8 +2,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.StringTokenizer;
@@ -50,13 +48,15 @@ public class Main {
             adjLists[start].add(new Road(end, dist));
         }
 
-        Queue<int[]> pq = new PriorityQueue<>(
-                (e1, e2) -> e1[1] - e2[1]
-        );
+        Queue<int[]> pq = new PriorityQueue<>((e1, e2) -> e1[1] - e2[1]);
         pq.add(new int[]{1, 0});
 
         // 도시까지의 최단거리 정보
-        Map<Integer, ArrayList<Integer>> distMap = new HashMap<>();
+        PriorityQueue<Integer>[] distMap;
+        distMap = new PriorityQueue[n + 1];
+        for (int i = 1; i <= n; i++) {
+            distMap[i] = new PriorityQueue<>((a, b) -> b - a);
+        }
 
         while (!pq.isEmpty()) {
             int[] cur = pq.poll();
@@ -64,12 +64,11 @@ public class Main {
             int dist = cur[1];
 
             // 최단거리가 처음 지정되거나 ||  (k번째 최단거리까지 구해지지 않았고 && 저장된 최단거리 중 가장 먼 최단거리보다 멀게 도착하는 경우만)
-            if (!distMap.containsKey(nodeNum) || (distMap.get(nodeNum).size() < k
-                    && distMap.get(nodeNum).get(distMap.get(nodeNum).size() - 1) <= dist)) {
-                distMap.putIfAbsent(nodeNum, new ArrayList<>());
-                distMap.get(nodeNum).add(dist);
+            if (distMap[nodeNum].isEmpty() || (distMap[nodeNum].size() < k
+                    && distMap[nodeNum].peek() <= dist)) {
+                distMap[nodeNum].add(dist);
                 for (Road road : adjLists[nodeNum]) {
-                        pq.add(new int[]{road.end, dist + road.dist});
+                    pq.add(new int[]{road.end, dist + road.dist});
                 }
             }
         }
@@ -77,8 +76,8 @@ public class Main {
         sb = new StringBuilder();
 
         for (int i = 1; i <= n; i++) {
-            if (distMap.get(i) != null && distMap.get(i).size() == k) {
-                sb.append(distMap.get(i).get(k - 1)).append("\n");
+            if (!distMap[i].isEmpty() && distMap[i].size() == k) {
+                sb.append(distMap[i].peek()).append("\n");
             } else {
                 sb.append(-1).append("\n");
             }
