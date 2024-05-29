@@ -4,7 +4,6 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.StringTokenizer;
@@ -13,6 +12,17 @@ public class Main {
 
     static StringTokenizer st;
     static StringBuilder sb;
+
+    static class Road {
+
+        int end;
+        int dist;
+
+        public Road(int end, int dist) {
+            this.end = end;
+            this.dist = dist;
+        }
+    }
 
     public static void main(String[] args) throws IOException {
 
@@ -25,7 +35,11 @@ public class Main {
         int k = Integer.parseInt(st.nextToken());
 
         // 도시간 도로의 거리 정보
-        Map<Integer, Map<Integer, ArrayList<Integer>>> roadMap = new HashMap<>();
+        ArrayList<Road>[] adjLists = new ArrayList[n + 1];
+
+        for (int i = 1; i <= n; i++) {
+            adjLists[i] = new ArrayList<>();
+        }
 
         for (int i = 0; i < m; i++) {
             st = new StringTokenizer(br.readLine());
@@ -33,9 +47,7 @@ public class Main {
             int end = Integer.parseInt(st.nextToken());
             int dist = Integer.parseInt(st.nextToken());
 
-            roadMap.putIfAbsent(start, new HashMap<>());
-            roadMap.get(start).putIfAbsent(end, new ArrayList<>());
-            roadMap.get(start).get(end).add(dist);
+            adjLists[start].add(new Road(end, dist));
         }
 
         Queue<int[]> pq = new PriorityQueue<>(
@@ -56,13 +68,8 @@ public class Main {
                     && distMap.get(nodeNum).get(distMap.get(nodeNum).size() - 1) <= dist)) {
                 distMap.putIfAbsent(nodeNum, new ArrayList<>());
                 distMap.get(nodeNum).add(dist);
-                if (roadMap.containsKey(nodeNum)) {
-                    for (Entry<Integer, ArrayList<Integer>> entry : roadMap.get(nodeNum)
-                            .entrySet()) {
-                        for (Integer value : entry.getValue()) {
-                            pq.add(new int[]{entry.getKey(), dist + value});
-                        }
-                    }
+                for (Road road : adjLists[nodeNum]) {
+                        pq.add(new int[]{road.end, dist + road.dist});
                 }
             }
         }
@@ -78,6 +85,6 @@ public class Main {
         }
 
         System.out.println(sb);
-        
+
     }
 }
