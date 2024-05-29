@@ -1,7 +1,6 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -13,6 +12,7 @@ import java.util.StringTokenizer;
 public class Main {
 
     static StringTokenizer st;
+    static StringBuilder sb;
 
     public static void main(String[] args) throws IOException {
 
@@ -26,7 +26,6 @@ public class Main {
 
         // 도시간 도로의 거리 정보
         Map<Integer, Map<Integer, ArrayList<Integer>>> roadMap = new HashMap<>();
-
 
         for (int i = 0; i < m; i++) {
             st = new StringTokenizer(br.readLine());
@@ -44,7 +43,6 @@ public class Main {
         );
         pq.add(new int[]{1, 0});
 
-
         // 도시까지의 최단거리 정보
         Map<Integer, ArrayList<Integer>> distMap = new HashMap<>();
 
@@ -59,7 +57,8 @@ public class Main {
                 distMap.putIfAbsent(nodeNum, new ArrayList<>());
                 distMap.get(nodeNum).add(dist);
                 if (roadMap.containsKey(nodeNum)) {
-                    for (Entry<Integer, ArrayList<Integer>> entry : roadMap.get(nodeNum).entrySet()) {
+                    for (Entry<Integer, ArrayList<Integer>> entry : roadMap.get(nodeNum)
+                            .entrySet()) {
                         for (Integer value : entry.getValue()) {
                             pq.add(new int[]{entry.getKey(), dist + value});
                         }
@@ -68,13 +67,17 @@ public class Main {
             }
         }
 
+        sb = new StringBuilder();
+
         for (int i = 1; i <= n; i++) {
             if (distMap.get(i) != null && distMap.get(i).size() == k) {
-                System.out.println(distMap.get(i).get(k - 1));
+                sb.append(distMap.get(i).get(k - 1)).append("\n");
             } else {
-                System.out.println(-1);
+                sb.append(-1).append("\n");
             }
         }
 
+        System.out.println(sb);
+        
     }
 }
