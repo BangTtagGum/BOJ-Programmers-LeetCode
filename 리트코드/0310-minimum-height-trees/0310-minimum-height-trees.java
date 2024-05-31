@@ -28,7 +28,7 @@ class Solution {
             for (Integer leaf : leaves) {
                 // 리프 노드의 이웃 노드 추출
                 int neighbor = graph.get(leaf).get(0);
-                // 이웃 노드와 리프노드의 연결 삭제
+                // 이웃 노드와 리프노드의 연결 삭제 Object로 형변환을 해주지 않으면 index가 삭제되어 예외 발생
                 graph.get(neighbor).remove((Object) leaf);
                 graph.get(leaf).remove((Object) neighbor); // 리프노드의 연결은 굳이 삭제하지 않아도 상관 x
 
