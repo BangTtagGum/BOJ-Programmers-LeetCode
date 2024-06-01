@@ -14,7 +14,6 @@ public class Main {
     static StringBuilder sb;
     static int n, m;
     static int start, end;
-    static int shortestDist;
     static Map<Integer, Map<Integer, Integer>> roadMap;
     static Map<Integer, Integer> distMap;
 
@@ -70,7 +69,6 @@ public class Main {
                 roadMap.putIfAbsent(u, new HashMap<>());
                 roadMap.get(u).put(v, p);
             }
-            shortestDist = findShortestWay(start, end);
 
             banShortestWay(start, end);
 
@@ -79,41 +77,19 @@ public class Main {
         System.out.println(sb);
     }
 
-    static int findShortestWay(int s, int e) {
-        distMap = new HashMap<>(10050);
-
-        PriorityQueue<Road> pq = new PriorityQueue<>((r1, r2) -> r1.dist - r2.dist);
-
-        pq.add(new Road(s, 0));
-
-        while (!pq.isEmpty()) {
-            Road road = pq.poll();
-            int cityNum = road.end;
-            int dist = road.dist;
-
-            if (cityNum == e) {
-                return dist;
-            }
-            if (!distMap.containsKey(cityNum)) {
-                distMap.put(cityNum, dist);
-                if (roadMap.containsKey(cityNum)) {
-                    for (Entry<Integer, Integer> entry : roadMap.get(cityNum).entrySet()) {
-                        pq.add(new Road(entry.getKey(), dist + entry.getValue()));
-                    }
-                }
-            }
-        }
-        return -1;
-    }
 
     // 목적지까지의 최단거리 경로 금지
     static void banShortestWay(int s, int e) {
+        
+        
         distMap = new HashMap<>(10050);
 
         PriorityQueue<Road> pq = new PriorityQueue<>((r1, r2) -> r1.dist - r2.dist);
 
         pq.add(new Road(s, 0));
 
+        int shortestDist = Integer.MAX_VALUE;
+        
         while (!pq.isEmpty()) {
             Road road = pq.poll();
             int cityNum = road.end;
