@@ -7,8 +7,8 @@ import java.util.StringTokenizer;
 public class Main {
 
     static StringTokenizer st;
-    static int[] possible;
-    static boolean[] visited;
+    static int[] isValid; // 0 불가 1 가능
+    static boolean[] isCalled;
     static ArrayList<Integer>[] adjList;
 
     public static void main(String[] args) throws IOException {
@@ -32,24 +32,25 @@ public class Main {
             adjList[u].add(v);
         }
 
-        possible = new int[n + 1];
-        visited = new boolean[n + 1];
+        isValid = new int[n + 1];
+        isCalled = new boolean[n + 1];
 
+        // 한번 방문했던 노드는 성공, 실패 여부가 나왔기에 재방문 하지 않도록
         for (int i = 1; i <= n; i++) {
-            possible[i] = -1;  // Initialize possible array with -1 (unvisited state)
+            isValid[i] = -1;
         }
 
         for (int i = 1; i <= n; i++) {
-            if (possible[i] == -1) {
-                visited[i] = true;
+            if (isValid[i] == -1) {
+                isCalled[i] = true;
                 dfs(i);
-                visited[i] = false;
+                isCalled[i] = false;
             }
         }
 
         int count = 0;
         for (int i = 1; i <= n; i++) {
-            if (possible[i] == 1) {
+            if (isValid[i] == 1) {
                 count++;
             }
         }
@@ -57,25 +58,25 @@ public class Main {
         System.out.println(count);
     }
 
-    static int dfs(int node) {
-        if (possible[node] != -1) {
-            return possible[node];
+    static int dfs(int memberNum) {
+        if (isValid[memberNum] != -1) {
+            return isValid[memberNum];
         }
 
-        possible[node] = 1; // Assume this node is valid initially
-        for (int next : adjList[node]) {
-            if (visited[next]) {
-                possible[node] = 0; // Found a cycle
+        isValid[memberNum] = 1;
+        for (int i : adjList[memberNum]) {
+            if (isCalled[i]) {
+                isValid[memberNum] = 0;
                 continue;
             }
 
-            visited[next] = true;
-            if (dfs(next) == 0) {
-                possible[node] = 0;
+            isCalled[i] = true;
+            if (dfs(i) == 0) {
+                isValid[memberNum] = 0;
             }
-            visited[next] = false;
+            isCalled[i] = false;
         }
 
-        return possible[node];
+        return isValid[memberNum];
     }
 }
