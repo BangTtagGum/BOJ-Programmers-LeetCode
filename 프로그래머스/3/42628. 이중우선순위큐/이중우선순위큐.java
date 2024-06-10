@@ -59,15 +59,6 @@ class Solution {
             mmpq.operation(operation);
         }
         
-        ArrayList<Integer> arr = new ArrayList<>();
-        
-        arr.add(mmpq.pollLargest());
-        arr.add(mmpq.pollSmallest());
-        
-        int[] answer = new int[arr.size()];
-        for(int i = 0; i < arr.size(); i++){
-            answer[i] = arr.get(i); 
-        }
-        return answer;
+        return new int[]{mmpq.pollLargest(),mmpq.pollSmallest()};
     }
 }
