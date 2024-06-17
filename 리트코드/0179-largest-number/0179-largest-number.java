@@ -10,20 +10,15 @@ class Solution {
 
     public static String largestNumber(int[] nums) {
 
-        for (int i = 1; i < nums.length; i++) {
-            for (int j = i; j > 0 ; j--) {
-                if (toSwap(nums[j - 1], nums[j])) {
-                    int tmp = nums[j];
-                    nums[j] = nums[j - 1];
-                    nums[j - 1] = tmp;
-                }
-            }
-        }
-
+        String[] s = new String[nums.length];
+        
+        for (int i = 0; i < nums.length; i++) s[i] = String.valueOf(nums[i]);
+        Arrays.sort(s, (a,b) -> (b + a).compareTo(a + b));
+        
         if (nums[0] == 0) {
             return "0";
         } else {
-            return Arrays.toString(nums).replaceAll("\\[|\\]|,|\\s", "");
+            return String.join("",s);
         }
     }
 }
