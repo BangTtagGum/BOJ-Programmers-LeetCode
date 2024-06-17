@@ -12,9 +12,9 @@ class Solution {
     public ListNode insertionSortList(ListNode head) {
         
         ListNode parent = new ListNode();
-        ListNode p = parent;
+        
         while(head != null){
-            
+            ListNode p = parent;    
             while(p.next != null && p.next.val < head.val){
                 p = p.next;
             }
@@ -24,7 +24,7 @@ class Solution {
             p.next = head;
             head.next = pNext;
             head = hNext;
-            p = parent;
+
         }
 
         return parent.next;
