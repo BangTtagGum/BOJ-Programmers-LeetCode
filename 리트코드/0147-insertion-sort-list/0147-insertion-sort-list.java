@@ -15,7 +15,7 @@ class Solution {
         ListNode p = parent; 
         while(head != null){
                
-            while(p.next != null && p.next.val < head.val){
+            while(p.next != null && p.next.val <= head.val){
                 p = p.next;
             }
 
@@ -24,7 +24,10 @@ class Solution {
             p.next = head;
             head.next = pNext;
             head = hNext;
-            p = parent;
+
+            if(head != null && p.next.val > head.val){
+                p = parent;
+            }
         }
 
         return parent.next;
