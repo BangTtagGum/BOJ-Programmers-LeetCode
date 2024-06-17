@@ -1,12 +1,6 @@
 import java.math.BigInteger;
 
 class Solution {
-     public static boolean toSwap(int n1, int n2) {
-        if ((String.valueOf(n1) + n2).compareTo((String.valueOf(n2) + n1)) < 0) {
-            return true;
-        }
-        return false;
-    }
 
     public static String largestNumber(int[] nums) {
 
