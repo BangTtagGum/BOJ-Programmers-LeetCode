@@ -22,7 +22,6 @@ class Solution {
             need.put(c, need.get(c) -1);
 
             if(missing == 0){
-                    
                 while (left < right) {
                     if (!need.containsKey(s.charAt(left))) {
                         left++;
