@@ -1,25 +1,23 @@
 class Solution {
     public int characterReplacement(String s, int k) {
-        int maxCount = 0;
-        int result = s.length();
-        int left = 0, right = 0;
+        int[] arr = new int[26];
+        int res = 0;
+        int max = 0;
 
-        Map<Character, Integer> map = new HashMap<>();
-        for (char c : s.toCharArray()) {
-            right++;
+        int l = 0;
+        for (int r = 0; r < s.length(); r++) {
+            arr[s.charAt(r) - 'A']++;
 
-            map.put(c, map.getOrDefault(c, 0) + 1);
-            maxCount = Collections.max(map.values());
+            max = Math.max(max, arr[s.charAt(r) - 'A']);
 
-            if (right - left - maxCount > k) {
-                map.put(s.charAt(left), map.get(s.charAt(left)) - 1);
-                left++;
-            } else if (right - left - maxCount == k) {
-                result = right - left;
+            if (r - l + 1 - max > k) { 
+                arr[s.charAt(l) - 'A']--;
+                l++;
             }
 
+            res = Math.max(res, r - l + 1);
         }
 
-        return result;
+        return res;
     }
 }
