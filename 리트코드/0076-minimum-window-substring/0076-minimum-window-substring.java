@@ -33,8 +33,8 @@ class Solution {
                         }
                         break;
                     }
-                    if(minLen > right - left + 1){
-                        minLen = right - left + 1;
+                    if(minLen > right - left ){
+                        minLen = right - left ;
                         start = left;
                         end = right;
                     }
