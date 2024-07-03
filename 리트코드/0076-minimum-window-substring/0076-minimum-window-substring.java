@@ -18,32 +18,32 @@ class Solution {
             
             if(need.get(c) > 0){
                 missing--;
-                
-                if(missing == 0){
-                    
-                    while (left < right) {
-                        if (!need.containsKey(s.charAt(left))) {
-                            left++;
-                            continue;
-                        }
-                        if (need.get(s.charAt(left)) < 0) {
-                            need.put(s.charAt(left),need.get(s.charAt(left)) + 1);
-                            left++;
-                            continue;
-                        }
-                        break;
-                    }
-                    if(minLen > right - left ){
-                        minLen = right - left ;
-                        start = left;
-                        end = right;
-                    }
-                    need.put(s.charAt(left),need.get(s.charAt(left)) + 1);
-                    left++;
-                    missing++;
-                }
             }
             need.put(c, need.get(c) -1);
+
+            if(missing == 0){
+                    
+                while (left < right) {
+                    if (!need.containsKey(s.charAt(left))) {
+                        left++;
+                        continue;
+                    }
+                    if (need.get(s.charAt(left)) < 0) {
+                        need.put(s.charAt(left),need.get(s.charAt(left)) + 1);
+                        left++;
+                        continue;
+                    }
+                    break;
+                }
+                if(minLen > right - left){
+                    minLen = right - left;
+                    start = left;
+                    end = right;
+                }
+                need.put(s.charAt(left),need.get(s.charAt(left)) + 1);
+                left++;
+                missing++;
+            }
         }
 
         return s.substring(start,end);
