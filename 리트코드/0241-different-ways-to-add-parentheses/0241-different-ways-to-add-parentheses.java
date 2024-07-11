@@ -1,36 +1,29 @@
 class Solution {
-    public List<Integer> diffWaysToCompute(String expression) {
-        List<Integer> result = getCalculateResult(0, expression.length() - 1, expression);
-
-        return result;
-    }
-
-    public List<Integer> getCalculateResult(int left, int right, String expression) {
+    static public List<Integer> diffWaysToCompute(String expression) {
         List<Integer> result = new ArrayList<>();
-        String substring = expression.substring(left, right + 1);
 
-        if (!substring.contains("*") && !substring.contains("-") && !substring.contains("+")) {
-            result.add(Integer.parseInt(substring));
-            return result;
-        }
+        for (int i = 0; i < expression.length(); i++) {
+            char c = expression.charAt(i);
 
-        for (int i = left; i <= right; i++) {
-            if (!Character.isDigit(expression.charAt(i))) {
-                List<Integer> leftList = getCalculateResult(left, i - 1, expression);
-                List<Integer> rightList = getCalculateResult(i + 1, right, expression);
+            if (c == '+' || c == '-' || c == '*') {
+                List<Integer> left = diffWaysToCompute(expression.substring(0, i));
+                List<Integer> right = diffWaysToCompute(expression.substring(i + 1));
 
-                for (Integer l : leftList) {
-                    for (Integer r : rightList) {
-                        if (expression.charAt(i) == '+') {
+                for (int l : left) {
+                    for (int r : right) {
+                        if(c == '+'){
                             result.add(l + r);
-                        } else if (expression.charAt(i) == '-') {
+                        } else if (c == '-') {
                             result.add(l - r);
-                        } else if (expression.charAt(i) == '*') {
+                        } else if (c == '*') {
                             result.add(l * r);
                         }
                     }
                 }
             }
+        }
+        if (result.isEmpty()) {
+            result.add(Integer.parseInt(expression));
         }
 
         return result;
