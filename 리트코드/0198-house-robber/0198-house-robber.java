@@ -1,8 +1,5 @@
 class Solution {
     public int rob(int[] nums) {
-        // if(nums.length == 1){
-        //     return nums[0];
-        // }
         int[] dp = new int[nums.length + 1];
         dp[0] = 0;
         dp[1] = nums[0]; 
