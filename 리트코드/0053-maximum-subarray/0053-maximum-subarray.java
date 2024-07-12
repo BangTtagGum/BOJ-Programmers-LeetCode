@@ -1,9 +1,12 @@
 class Solution {
     public int maxSubArray(int[] nums) {
 
-        for (int i = 1; i < nums.length ; i++) {
-            nums[i] += Math.max(nums[i - 1], 0);
+        int cur = 0;
+        int bestSum = Integer.MIN_VALUE;
+        for (int num : nums) {
+            cur = Math.max(num, cur + num);
+            bestSum = Math.max(bestSum, cur);
         }
-        return Arrays.stream(nums).max().getAsInt();
-    }    
+        return bestSum;
+    } 
 }
