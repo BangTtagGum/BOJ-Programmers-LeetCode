@@ -1,39 +1,59 @@
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Arrays;
- 
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.PriorityQueue;
+import java.util.StringTokenizer;
+
 public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        
-        int n = sc.nextInt();
-        
-        int[] abilities = new int[2 * n];
-        for (int i = 0; i < 2 * n; i++) {
-            abilities[i] = sc.nextInt();
+
+    static StringTokenizer st;
+
+    static class Team {
+
+        int val = 0;
+        int count = 0;
+
+        public void addVal(int val) {
+            this.val += val;
+            count++;
         }
-        
-        TeamFormation teamFormation = new TeamFormation(abilities);
-        int result = teamFormation.findMinSum();
-        
-        System.out.println(result);
+
+        public int getVal() {
+            return val;
+        }
     }
-}
- 
-class TeamFormation {
-    private int[] abilities; 
-    
-    public TeamFormation(int[] abilities) {
-        this.abilities = abilities;
-        Arrays.sort(this.abilities);
-    }
-    
-    public int findMinSum() {
-        int n = abilities.length / 2; 
-        int minSum = Integer.MAX_VALUE; 
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int n = Integer.parseInt(br.readLine());
+
+        Integer[] values = Arrays.stream(br.readLine().split(" ")).map(Integer::parseInt)
+                .toArray(Integer[]::new);
+
+        Arrays.sort(values, Comparator.reverseOrder());
+
+        PriorityQueue<Team> teams = new PriorityQueue<>((t1, t2) -> {
+            if(t1.count == t2.count){
+                return t1.val - t2.val;
+            }
+            return t1.count - t2.count;
+        });
+
         for (int i = 0; i < n; i++) {
-            int sum = abilities[i] + abilities[abilities.length - i - 1];
-            minSum = Math.min(minSum, sum);
+            teams.add(new Team());
         }
-        return minSum;
+        for (Integer value : values) {
+            Team team = teams.poll();
+            team.addVal(value);
+            teams.add(team);
+        }
+
+        System.out.println(teams.poll().val);
+
     }
+
 }
