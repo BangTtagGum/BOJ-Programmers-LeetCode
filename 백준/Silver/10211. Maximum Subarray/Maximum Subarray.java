@@ -2,6 +2,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -23,12 +24,11 @@ public class Main {
             for (int i = 0; i < n; i++) {
                 nums[i] = Integer.parseInt(st.nextToken());
             }
-            ArrayList<Integer> sums = new ArrayList<>(List.of(nums[0]));
             for (int i = 1; i < n; i++) {
-                sums.add(nums[i] + (sums.get(i - 1) > 0 ? sums.get(i - 1) : 0));
+                nums[i] = nums[i] + Math.max(nums[i - 1], 0);
             }
 
-            System.out.println(Collections.max(sums));
+            System.out.println(Arrays.stream(nums).max().getAsInt());
         }
 
         br.close();
